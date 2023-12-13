@@ -244,11 +244,15 @@
             items: 
             - name: "Prioritizing Schannel Cipher Suites"
               href: prioritizing-schannel-cipher-suites.md
+            - name: "TLS Cipher Suites in Windows 11 v22H2"
+              href: tls-cipher-suites-in-windows-11-v22H2.md
             - name: "TLS Cipher Suites in Windows 11"
               href: tls-cipher-suites-in-windows-11.md
             - name: "TLS Cipher Suites in Windows Server 2022"
               href: tls-cipher-suites-in-windows-server-2022.md
-            - name: "TLS Cipher Suites in Windows 10 v20H2 and v21H1"
+            - name: "TLS Cipher Suites in Windows 10 v22H2"
+              href: tls-cipher-suites-in-windows-10-v22H2.md
+            - name: "TLS Cipher Suites in Windows 10 v20H2, v21H1, and v21H2"
               href: tls-cipher-suites-in-windows-10-v20H2.md
             - name: "TLS Cipher Suites in Windows 10 v1903"
               href: tls-cipher-suites-in-windows-10-v1903.md
@@ -539,6 +543,8 @@
           href: extra-buffers-returned-by-schannel.md
         - name: "PSDK Samples Using Schannel"
           href: psdk-samples-using-schannel.md
+      - name: "Supporting Extended Protection for Authentication (EPA) in a service"
+        href: epa-support-in-service.md
     - name: "Protecting the Automatic Logon Password"
       href: protecting-the-automatic-logon-password.md
   - name: "Authentication Reference"
@@ -1155,6 +1161,10 @@
         href: /windows/desktop/api/Winscard/nf-winscard-scarduidlgselectcarda
       - name: "SCardWriteCache"
         href: /windows/desktop/api/Winscard/nf-winscard-scardwritecachea
+      - name: "SeciAllocateAndSetIPAddress"
+        href: SeciAllocateAndSetIPAddress.md
+      - name: "SeciFreeCallContext"
+        href: SeciFreeCallContext.md
       - name: "SendSAS"
         href: /windows/desktop/api/Sas/nf-sas-sendsas
       - name: "SetContextAttributes"
@@ -1283,6 +1293,8 @@
         href: /windows/desktop/api/Sspi/nf-sspi-sspiprepareforcredwrite
       - name: "SspiPromptForCredentials"
         href: /windows/desktop/api/Sspi/nf-sspi-sspipromptforcredentialsa
+      - name: "SspiSetChannelBindingFlags"
+        href: sspi-sspisetchannelbindingflags.md
       - name: "SspiUnmarshalAuthIdentity"
         href: /windows/desktop/api/Sspi/nf-sspi-sspiunmarshalauthidentity
       - name: "SspiUnmarshalCredUIContext"

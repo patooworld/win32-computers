@@ -801,14 +801,26 @@
       href: /windows/win32/api/comppkgsup/nf-comppkgsup-instantiatecomponentfrompackage
     - name: "IsMediaBehaviorEnabled"
       href: /windows/win32/api/comppkgsup/nf-comppkgsup-ismediabehaviorenabled
+    - name: NtAssociateWaitCompletionPacket
+      href: ntassociatewaitcompletionpacket.md
+    - name: NtCancelWaitCompletionPacket
+      href: ntcancelwaitcompletionpacket.md
+    - name: NtCreateWaitCompletionPacket
+      href: ntcreatewaitcompletionpacket.md
     - name: "NtClose"
       href: /windows/win32/api/Winternl/nf-winternl-ntclose
     - name: "NtDeviceIoControlFile"
       href: /windows/win32/api/Winternl/nf-winternl-ntdeviceiocontrolfile
+    - name: NtQuerySection
+      href: ntquerysection.md
+    - name: NtRemoveIoCompletion
+      href: ntremoveiocompletion.md
     - name: "NtWaitForSingleObject"
       href: /windows/win32/api/Winternl/nf-winternl-ntwaitforsingleobject
     - name: "ObOpenObjectByName Function"
       href: obopenobjectbyname-function.md
+    - name: "PROCESS_TELEMETRY_ID_INFORMATION_TYPE structure"
+      href: process_telemetry_id_information_type.md
     - name: "RegisterServerForPMP"
       href: /windows/win32/api/comppkgsup/nf-comppkgsup-registerserverforpmp
     - name: "RequireNetworkDuringMediaTaskCompletion"
@@ -821,6 +833,10 @@
       href: rtlcompareunicodestring.md
     - name: "RtlDllShutdownInProgress"
       href: rtldllshutdowninprogress.md
+    - name: RtlIsDosDeviceName_U
+      href: rtlisdosdevicename_u.md
+    - name: RtlDosPathNameToNtPathName_U_WithStatus
+      href: rtldospathnametontpathname_u_withstatus.md
     - name: "RtlFreeAnsiString"
       href: /windows/win32/api/Winternl/nf-winternl-rtlfreeansistring
     - name: "RtlFreeHeap"
@@ -857,6 +873,8 @@
       href: /windows/win32/api/Ime/nf-ime-sendimemessageexa
     - name: "STRING"
       href: /windows/win32/api/Winternl/ns-winternl-string
+    - name: "TellsOsIsInProcessorMode"
+      href: tellsIsosinprocessormode.md
     - name: "UnregisterServerForPMP"
       href: /windows/win32/api/comppkgsup/nf-comppkgsup-unregisterserverforpmp
     - name: "VBAGetExprSrv"

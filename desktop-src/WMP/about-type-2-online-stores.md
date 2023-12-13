@@ -8,10 +8,13 @@ keywords:
 - type 2 online stores,about
 - Windows Media Player,type 2 online stores
 ms.topic: article
-ms.date: 05/31/2018
+ms.date: 4/26/2023
+ms.custom: UpdateFrequency5
 ---
 
 # About Type 2 Online Stores
+
+\[The feature associated with this page, [Windows Media Player SDK](/windows/win32/wmp/windows-media-player-sdk), is a legacy feature. It has been superseded by [MediaPlayer](/uwp/api/Windows.Media.Playback.MediaPlayer). **MediaPlayer** has been optimized for Windows 10 and Windows 11. Microsoft strongly recommends that new code use **MediaPlayer** instead of **Windows Media Player SDK**, when possible. Microsoft suggests that existing code that uses the legacy APIs be rewritten to use the new APIs if possible.\]
 
 > [!Note]  
 > This section describes functionality designed for use by online stores. Use of this functionality outside the context of an online store is not supported.
@@ -27,7 +30,7 @@ The following sections provide overview information about type 2 online stores.
 
 | Section | Description | 
 |---------|-------------|
-| <a href="service-task-panes.md">Service Task Panes</a> | Provides general information about the three service task panes that an online store can display in Windows Media Player 10.<blockquote>[!Note]<br />In Windows Media Player 11 there is only one task pane, which is displayed when the user clicks the <strong>Online Stores</strong> tab.</blockquote><br /> | 
+| [Service Task Panes](service-task-panes.md) | Provides general information about the three service task panes that an online store can display in Windows Media Player 10. **Note:** In Windows Media Player 11 there is only one task pane, which is displayed when the user clicks the **Online Stores** tab.<br> | 
 | <a href="purchase-integration-for-type-2-online-stores.md">Purchase Integration for Type 2 Online Stores</a> | Describes how online stores handle requests to purchase media content. | 
 | <a href="download-manager.md">Download Manager</a> | Describes the Windows Media Player Download Manager. | 
 | <a href="album-info-integration.md">Album Info Integration</a> | Describes how an online store handles requests to display album details. | 

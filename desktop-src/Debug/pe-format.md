@@ -420,13 +420,13 @@ IMAGE\_SCN\_LNK\_NRELOC\_OVFL indicates that the count of relocations for the se
 
 ### Grouped Sections (Object Only)
 
-The "$"? character (dollar sign) has a special interpretation in section names in object files.
+The "$" character (dollar sign) has a special interpretation in section names in object files.
 
-When determining the image section that will contain the contents of an object section, the linker discards the "$"? and all characters that follow it. Thus, an object section named .**text$X** actually contributes to the **.text** section in the image.
+When determining the image section that will contain the contents of an object section, the linker discards the "$" and all characters that follow it. Thus, an object section named .**text$X** actually contributes to the **.text** section in the image.
 
-However, the characters following the "$"? determine the ordering of the contributions to the image section. All contributions with the same object-section name are allocated contiguously in the image, and the blocks of contributions are sorted in lexical order by object-section name. Therefore, everything in object files with section name **.text$X** ends up together, after the **.text$W** contributions and before the **.text$Y** contributions.
+However, the characters following the "$" determine the ordering of the contributions to the image section. All contributions with the same object-section name are allocated contiguously in the image, and the blocks of contributions are sorted in lexical order by object-section name. Therefore, everything in object files with section name **.text$X** ends up together, after the **.text$W** contributions and before the **.text$Y** contributions.
 
-The section name in an image file never contains a "$"? character.
+The section name in an image file never contains a "$" character.
 
 ## Other Contents of the File
 
@@ -2160,11 +2160,23 @@ The archive file signature identifies the file type. Any utility (for example, a
 
 `!<arch>\n`
 
+The Windows SDK winnt.h header defines the following macros:
+
+```
+#define IMAGE_ARCHIVE_START_SIZE             8
+#define IMAGE_ARCHIVE_START                  "!<arch>\n"
+#define IMAGE_ARCHIVE_END                    "`\n"
+#define IMAGE_ARCHIVE_PAD                    "\n"
+#define IMAGE_ARCHIVE_LINKER_MEMBER          "/               "
+#define IMAGE_ARCHIVE_LONGNAMES_MEMBER       "//              "
+#define IMAGE_ARCHIVE_HYBRIDMAP_MEMBER       "/<HYBRIDMAP>/   "
+```
+
 ### Archive Member Headers
 
 Each member (linker, longnames, or object-file member) is preceded by a header. An archive member header has the following format, in which each field is an ASCII text string that is left justified and padded with spaces to the end of the field. There is no terminating null character in any of these fields.
 
-Each member header starts on the first even address after the end of the previous archive member.
+Each member header starts on the first even address after the end of the previous archive member, one byte '\n' (IMAGE_ARCHIVE_PAD) may be inserted after an archive member to make the following member start on an even address.
 
 
 
@@ -2176,11 +2188,7 @@ Each member header starts on the first even address after the end of the previou
 | 34 <br/> | 6 <br/>  | Group ID <br/>      | An ASCII decimal representation of the group ID. This field does not contain a meaningful value on Windows platforms because Microsoft tools emit all blanks. <br/>                                   |
 | 40 <br/> | 8 <br/>  | Mode <br/>          | An ASCII octal representation of the member's file mode. This is the ST\_MODE value from the C run-time function \_wstat. <br/>                                                                       |
 | 48 <br/> | 10 <br/> | Size <br/>          | An ASCII decimal representation of the total size of the archive member, not including the size of the header. <br/>                                                                                  |
-| 58 <br/> | 2 <br/>  | End of Header <br/> | The two bytes in the C string "`\\n" (0x60 0x0A). <br/>                                                                                                                                               |
-
-
-
- 
+| 58 <br/> | 2 <br/>  | End of Header <br/> | The two bytes (0x60 0x0A) in the C string "`\\n" (IMAGE_ARCHIVE_END). <br/>                                                             
 
 The Name field has one of the formats shown in the following table. As mentioned earlier, each of these strings is left justified and padded with trailing spaces within a field of 16 bytes:
 
@@ -2199,7 +2207,7 @@ The Name field has one of the formats shown in the following table. As mentioned
 
 ### First Linker Member
 
-The name of the first linker member is "/". The first linker member is included for backward compatibility. It is not used by current linkers, but its format must be correct. This linker member provides a directory of symbol names, as does the second linker member. For each symbol, the information indicates where to find the archive member that contains the symbol.
+The name of the first linker member is "/" (IMAGE_ARCHIVE_LINKER_MEMBER). The first linker member is included for backward compatibility. It is not used by current linkers, but its format must be correct. This linker member provides a directory of symbol names, as does the second linker member. For each symbol, the information indicates where to find the archive member that contains the symbol.
 
 The first linker member has the following format. This information appears after the header:
 
@@ -2219,7 +2227,7 @@ The elements in the offsets array must be arranged in ascending order. This fact
 
 ### Second Linker Member
 
-The second linker member has the name "/" as does the first linker member. Although both linker members provide a directory of symbols and archive members that contain them, the second linker member is used in preference to the first by all current linkers. The second linker member includes symbol names in lexical order, which enables faster searching by name.
+Like the first linker member, the second linker member has the name "/" (IMAGE_ARCHIVE_LINKER_MEMBER). Although both linker members provide a directory of symbols and archive members that contain them, the second linker member is used in preference to the first by all current linkers. The second linker member includes symbol names in lexical order, which enables faster searching by name.
 
 The second member has the following format. This information appears after the header:
 
@@ -2239,7 +2247,7 @@ The second member has the following format. This information appears after the h
 
 ### Longnames Member
 
-The name of the longnames member is "//". The longnames member is a series of strings of archive member names. A name appears here only when there is insufficient room in the Name field (16 bytes). The longnames member is optional. It can be empty with only a header, or it can be completely absent without even a header.
+The name of the longnames member is "//" (IMAGE_ARCHIVE_LONGNAMES_MEMBER). The longnames member is a series of strings of archive member names. A name appears here only when there is insufficient room in the Name field (16 bytes). The longnames member is optional. It can be empty with only a header, or it can be completely absent without even a header.
 
 The strings are null-terminated. Each string begins immediately after the null byte in the previous string.
 
@@ -2301,9 +2309,9 @@ The following values are defined for the Type field in the import header:
 
 | Constant                  | Value         | Description                                      |
 |---------------------------|---------------|--------------------------------------------------|
-| IMPORT\_CODE <br/>  | 0 <br/> | Executable code. <br/>                     |
-| IMPORT\_DATA <br/>  | 1 <br/> | Data. <br/>                                |
-| IMPORT\_CONST <br/> | 2 <br/> | Specified as CONST in the .def file. <br/> |
+| IMPORT\_OBJECT\_CODE <br/>  | 0 <br/> | Executable code. <br/>                     |
+| IMPORT\_OBJECT\_DATA <br/>  | 1 <br/> | Data. <br/>                                |
+| IMPORT\_OBJECT\_CONST <br/> | 2 <br/> | Specified as CONST in the .def file. <br/> |
 
 These values are used to determine which section contributions must be generated by the tool that uses the library if it must access that data.
 
@@ -2313,10 +2321,10 @@ The null-terminated import symbol name immediately follows its associated import
 
 | Constant | Value | Description |
 | - | - | - |
-| IMPORT\_ORDINAL | 0 | The import is by ordinal. This indicates that the value in the Ordinal/Hint field of the import header is the import's ordinal. If this constant is not specified, then the Ordinal/Hint field should always be interpreted as the import's hint. |
-| IMPORT\_NAME | 1 | The import name is identical to the public symbol name. |
-| IMPORT\_NAME\_NOPREFIX | 2 | The import name is the public symbol name, but skipping the leading ?, @, or optionally \_. |
-| IMPORT\_NAME\_UNDECORATE | 3 | The import name is the public symbol name, but skipping the leading ?, @, or optionally \_, and truncating at the first @. |
+| IMPORT\_OBJECT\_ORDINAL | 0 | The import is by ordinal. This indicates that the value in the Ordinal/Hint field of the import header is the import's ordinal. If this constant is not specified, then the Ordinal/Hint field should always be interpreted as the import's hint. |
+| IMPORT\_OBJECT\_NAME | 1 | The import name is identical to the public symbol name. |
+| IMPORT\_OBJECT\_NAME\_NOPREFIX | 2 | The import name is the public symbol name, but skipping the leading ?, @, or optionally \_. |
+| IMPORT\_OBJECT\_NAME\_UNDECORATE | 3 | The import name is the public symbol name, but skipping the leading ?, @, or optionally \_, and truncating at the first @. |
 
 ## Appendix A: Calculating Authenticode PE Image Hash
 

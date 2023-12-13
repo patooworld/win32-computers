@@ -199,7 +199,7 @@ The options available in the standard Windows message box are very limited. When
 
 Windows applications are now becoming simpler to use because of the high volume of non-technical users. Sometimes, it can be much simpler to provide buttons with friendlier texts and even some additional controls—LinkLabels, for instance—to make it easier to accomplish the task at hand.
 
-The Microsoft .NET Framework makes it easy to implement custom dialogs. By just assigning a couple of properties on your custom dialog form, or with a single line of code, your form can work just like a standard message box. In a button-click event, set the dialog's **DialogResult** property to **DialogResult.Ok** or **DialogResult.Cancel**. Use the **ShowDialog(\[OwnerForm\])** method from the parent form. This method method returns the **DialogResult** value.
+The Microsoft .NET Framework makes it easy to implement custom dialogs. By just assigning a couple of properties on your custom dialog form, or with a single line of code, your form can work just like a standard message box. In a button-click event, set the dialog's **DialogResult** property to **DialogResult.Ok** or **DialogResult.Cancel**. Use the **ShowDialog(\[OwnerForm\])** method from the parent form. This method returns the **DialogResult** value.
 
 You can use all **DialogResult** members. These same options are used by the standard **MessageBox.Show** method.
 
@@ -256,7 +256,7 @@ Taskbar flashes can be useful, of course, but should be called upon only when yo
 
 ![screen shot of a toast window.](images/humanux-10.png)
 
-"Toast" windows (see Figure 10), made famous by instant messaging clients like MSN Messenger, are a great solution for informing the user of something without annoying or disrupting his or her work flow. There is a great article by Bill Wagner on [creating Toast windows](/archive/msdn-magazine/2005/september/sprinkle-some-pizzazz-on-your-plain-vanilla-windows-forms-apps). It's good policy (and manners) to not disturb any other application's toasts. Obstruction of such windows can be annoying and unproductive. One solution is to use the [ToastSemaphore Mutex](/library/WinMessenger/winmessenger/overview/toast.asp) provided by the operating system to avoid toast collision.
+"Toast" windows (see Figure 10), made famous by instant messaging clients like MSN Messenger, are a great solution for informing the user of something without annoying or disrupting his or her work flow. There is a great article by Bill Wagner on [creating Toast windows](/archive/msdn-magazine/2005/september/sprinkle-some-pizzazz-on-your-plain-vanilla-windows-forms-apps). It's good policy (and manners) to not disturb any other application's toasts. Obstruction of such windows can be annoying and unproductive. One solution is to use the [ToastSemaphore Mutex](/previous-versions/windows/desktop/winmessenger/im-toast-ovw) provided by the operating system to avoid toast collision.
 
 Sometimes you may need to show multiple items by the toast. Popping up 3 or more toasts would not really be advisable. Instead, cycling through each by popping/fading one toast after the other would be better. Microsoft Outlook implements a similar solution when notifying the user of incoming e-mails.
 

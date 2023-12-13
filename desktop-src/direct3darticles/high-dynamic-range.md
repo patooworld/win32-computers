@@ -118,7 +118,7 @@ While the prevalence of HDR displays is growing rapidly, SDR displays will remai
 
 #### SDR display signaling support with high bit-depth
 
-The underlying signaling for SDR displays is unchanged, although the Windows 11m version 22H2 release supports 10 bits per channel and greater, depending on the display's capabilities.
+The underlying signaling for SDR displays is unchanged, although the Windows 11, version 22H2 release supports 10 bits per channel and greater, depending on the display's capabilities.
 
 #### System composition using a high bit-depth, canonical color space
 
@@ -357,7 +357,10 @@ However, if your app performs its own composition of SDR and HDR content into a 
 
 ### Step 1. Obtain the current SDR reference white level
 
-Currently, only UWP apps can obtain the current SDR reference white level via [**AdvancedColorInfo.SdrWhiteLevelInNits**](/uwp/api/windows.graphics.display.advancedcolorinfo.sdrwhitelevelinnits). That API requires a [**CoreWindow**](/uwp/api/Windows.UI.Core.CoreWindow).
+You can obtain the current SDR reference white level in one of these ways:
+
+* **In a desktop app**. [**DISPLAYCONFIG_SDR_WHITE_LEVEL**](/windows/win32/api/wingdi/ns-wingdi-displayconfig_sdr_white_level) and [**QueryDisplayConfig**](/windows/win32/api/winuser/nf-winuser-querydisplayconfig).
+* **In a UWP app**. [**AdvancedColorInfo.SdrWhiteLevelInNits**](/uwp/api/windows.graphics.display.advancedcolorinfo.sdrwhitelevelinnits) (using a [**CoreWindow**](/uwp/api/Windows.UI.Core.CoreWindow)).
 
 ### Step 2. Adjust color values of SDR content
 

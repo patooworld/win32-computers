@@ -5,10 +5,13 @@ ms.assetid: f7eff687-9832-41bc-8f3d-a2ab11917eb0
 keywords:
 - Windows Media Player Online Stores
 ms.topic: article
-ms.date: 05/31/2018
+ms.date: 4/26/2023
+ms.custom: UpdateFrequency5
 ---
 
 # Getting an Online Music Store On Board
+
+\[The feature associated with this page, [Windows Media Player SDK](/windows/win32/wmp/windows-media-player-sdk), is a legacy feature. It has been superseded by [MediaPlayer](/uwp/api/Windows.Media.Playback.MediaPlayer). **MediaPlayer** has been optimized for Windows 10 and Windows 11. Microsoft strongly recommends that new code use **MediaPlayer** instead of **Windows Media Player SDK**, when possible. Microsoft suggests that existing code that uses the legacy APIs be rewritten to use the new APIs if possible.\]
 
 This topic describes the process of bringing an online digital media store on board for Windows Media Player. The time required for the on-boarding process from start to finish is approximately 45-60 BUSINESS DAYS. The two stages of the on-boarding process are described in the following table.
 
@@ -145,7 +148,7 @@ Here are some common problems that can cause your store to fail validation testi
 
 -   Failure to transition from test servers to production servers. This leads to many problems such as missing pages, invalid IIS and security settings, and test accounts that no longer work.
 -   The Buy link (or Shop link) in the Now Playing area is invalid. This can cause your store to fail validation even when everything else is working.
--   Microsoft's validation team will test several purchasing scenarios ranging from small purchases to very large purchases. You must provide a rechargeable way for them to act as a consumer within your store. Your store can not be validated if the validation team does not have enough purchase credits to validate all of these scenarios.
+-   Microsoft's validation team will test several purchasing scenarios ranging from small purchases to very large purchases. You must provide a rechargeable way for them to act as a consumer within your store. Your store cannot be validated if the validation team does not have enough purchase credits to validate all of these scenarios.
 
 For a more complete list of common on-boarding problems and frequently asked questions compiled by the Windows Media Player Services Virtual Team, see [Common On-Boarding Problems for Online Music Stores](common-on-boarding-problems-for-online-music-stores.md).
 

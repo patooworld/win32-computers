@@ -82,7 +82,7 @@ COLORREF colors[] = { RGB(153,255,51),
 
 ## Add Handler for WM\_TOUCH and Track Points
 
-First, declare some variables that are used by the [**WM\_TOUCH**](wm-touchdown.md) handler in [**WndProc**](/previous-versions/windows/desktop/legacy/ms633573(v=vs.85)).
+First, declare some variables that are used by the [**WM\_TOUCH**](wm-touchdown.md) handler in [**WndProc**](/windows/win32/api/winuser/nc-winuser-wndproc).
 
 ```C++
 int wmId, wmEvent, i, x, y;
@@ -125,7 +125,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 ```
 
-Next, handle the [**WM\_TOUCH**](wm-touchdown.md) message from the [**WndProc**](/previous-versions/windows/desktop/legacy/ms633573(v=vs.85)) method. The following code shows an implementation of the handler for **WM\_TOUCH**.
+Next, handle the [**WM\_TOUCH**](wm-touchdown.md) message from the [**WndProc**](/windows/win32/api/winuser/nc-winuser-wndproc) method. The following code shows an implementation of the handler for **WM\_TOUCH**.
 
 ```C++
 case WM_TOUCH:        
@@ -151,6 +151,8 @@ case WM_TOUCH:
           }
         }
       }
+
+      InvalidateRect(hWnd, NULL, FALSE);
     }
     // If you handled the message and don't want anything else done with it, you can close it
     CloseTouchInputHandle((HTOUCHINPUT)lParam);
@@ -215,6 +217,7 @@ Declare the following variables for the drawing routine.
     // For drawing / fills
     PAINTSTRUCT ps;
     HDC hdc;
+    HBRUSH hBrush;
     
     // For tracking dwId to points
     int index;
@@ -234,22 +237,31 @@ The memory display context *memDC* is used for storing a temporary graphics cont
     }
     hMemBmp = CreateCompatibleBitmap(hdc, client.right, client.bottom);
     hOldBmp = (HBITMAP)SelectObject(memDC, hMemBmp);          
-  
-    FillRect(memDC, &client, CreateSolidBrush(RGB(255,255,255)));
-     
+
+    hBrush = CreateSolidBrush(RGB(255, 255, 255));
+    FillRect(memDC, &client, hBrush);
+    DeleteObject(hBrush);
+
     //Draw Touched Points                
-    for (i=0; i < MAXPOINTS; i++){        
-      SelectObject( memDC, CreateSolidBrush(colors[i]));           
+    for (i=0; i < MAXPOINTS; i++){
+      hBrush = CreateSolidBrush(colors[i]);        
+      SelectObject( memDC, hBrush);           
+
       x = points[i][0];
       y = points[i][1];
       if  (x >0 && y>0){              
         Ellipse(memDC, x - radius, y - radius, x+ radius, y + radius);
       }
+
+      DeleteObject(hBrush);
     }
   
     BitBlt(hdc, 0,0, client.right, client.bottom, memDC, 0,0, SRCCOPY);      
-
     EndPaint(hWnd, &ps);
+
+    SelectObject(memDC, hOldBmp);
+    DeleteObject(hMemBmp);
+
     break;
 ```
 
